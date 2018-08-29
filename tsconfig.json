@@ -27,7 +27,7 @@
     "target": "es5",
     "types": [],
     "typeRoots": [
-      "src/types",
+      "src",
       "node_modules/@types",
       "node_modules/@machinomy"
     ]
