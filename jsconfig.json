@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "baseUrl": "./",
+    "mapRoot": "./src/",
+    "paths": {
+      "*": ["./src/*"],
+      "components": ["./src/components"],
+      "modules": ["./src/modules"],
+      "redux": ["./src/redux"],
+      "types": ["./src/types"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

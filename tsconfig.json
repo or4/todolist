@@ -1,46 +1,45 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "allowUnreachableCode": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
+    "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "build/dist",
-    "module": "esnext",
-    "target": "es5",
-    "experimentalDecorators": true,
+    "jsx": "react",
     "lib": [
       "es6",
       "dom"
     ],
-    "sourceMap": true,
-    "jsx": "react",
+    "module": "esnext",
+    "experimentalDecorators": true,
     "moduleResolution": "node",
-    "types": [],
-    "typeRoots": [
-      "src/types"
-    ],
-    "rootDir": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitAny": false,
     "noUnusedLocals": false,
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
+    "allowUnreachableCode": true,
+    "outDir": "build/dist",
+    "paths": { },
+    "rootDir": "src",
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5",
+    "types": [],
+    "typeRoots": [
+      "src/types",
+      "node_modules/@types",
+      "node_modules/@machinomy"
     ]
   },
   "exclude": [
+    "acceptance-tests",
+    "build",
+    "jest",
     "node_modules/electron/node_modules/@types",
     "node_modules",
-    "build",
     "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "webpack"
   ]
 }

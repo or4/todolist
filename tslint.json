@@ -8,5 +8,9 @@
     "jsx-no-multiline-js": false,
     "jsx-no-lambda": false
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "semicolon": [
+    true,
+    "always"
+  ]
 }

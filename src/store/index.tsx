@@ -4,7 +4,7 @@ import createHistory from 'history/createHashHistory';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
 
-import { AppState, appInitialState } from 'core/reducer';
+import { createRootReducer, AppState, appInitialState } from 'core/reducer';
 import { sagas } from '../core/sagas';
 
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -37,10 +37,10 @@ const persistConfig = {
   blacklist: [],
 };
 
-const rootReducer = storage;
-const persistedReducer = persistReducer(persistConfig as any, rootReducer);
+const rootReducer =  createRootReducer(storage);
+const persistedReducer = persistReducer(persistConfig as any, rootReducer as any);
 
-const store = createStore<AppState>(persistedReducer, appInitialState, enhancer as any);
+const store = createStore<AppState>(persistedReducer as any, appInitialState, enhancer as any);
 sagaMiddleware.run(sagas);
 const persistor = persistStore(store);
 
