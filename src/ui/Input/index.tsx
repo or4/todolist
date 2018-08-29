@@ -24,7 +24,7 @@ const rawClasses = {
     width: '100%',
 
     boxSizing: 'border-box' as 'border-box',
-    ...lightFont(theme.colors.greyCool, '16px')
+    ...lightFont(theme.colors.greySecond, '16px')
   }
 };
 

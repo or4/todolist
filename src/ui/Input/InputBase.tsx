@@ -8,7 +8,12 @@ jss.setup(preset());
 
 const rawClasses = {
   container: {
-    padding: '5px 8px'
+    background: 'transparent',
+    padding: '5px 8px',
+
+    '&::placeholder': {
+      // color: 'white'
+    }
   },
 };
 

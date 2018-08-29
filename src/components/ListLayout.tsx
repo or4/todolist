@@ -16,7 +16,10 @@ const rawClasses = {
     padding: '0'
   },
   subContainer: {
-    paddingTop: '50px'
+    background: 'white',
+    borderRadius: '8px',
+    marginTop: '50px',
+    padding: '50px',
   }
 };
 
