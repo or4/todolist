@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from 'ui/Input';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
@@ -8,7 +9,7 @@ const rawClasses = {
   container: {
     display: 'flex',
     lineHeight: '23px',
-    width: '200px',
+    // width: '200px',
 
     '& > div': {
       width: '50%',
@@ -30,12 +31,17 @@ export class AddWord extends React.PureComponent<Props, State> {
     word: '',
     translate: '',
   }
+  onWordChange = (word: string) => {
+    this.setState({ word, });
+  }
+  onTraslateChange = (translate: string) => {
+    this.setState({ translate, });
+  }
   render() {
     const { word, translate } = this.state;
     return (
       <div className={classes.container}>
-        <div><input type="text" value={word} /> </div>
-        <div><input type="text" value={translate} /> </div>
+        <div><Input onChange={this.onWordChange} placeholder="Enter word" value={word} /> </div>
       </div>
     );
   }

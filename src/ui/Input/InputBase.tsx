@@ -1,43 +1,59 @@
 import React from 'react';
+import * as R from 'ramda';
+import { isNotNil } from 'helpers';
+
+import jss from 'jss';
+import preset from 'jss-preset-default';
+jss.setup(preset());
+
+const rawClasses = {
+  container: {
+    padding: '5px 8px'
+  },
+};
 
 type State = {
   isFocus: boolean;
 };
+
+const { classes } = jss.createStyleSheet(rawClasses).attach();
 
 class InputBase extends React.PureComponent<any, State> {
   refInput: any = React.createRef();
   state = { isFocus: false };
 
   focusInputBase = () => {
-    this.refInput &&
-      this.refInput.current &&
-        this.refInput.current.focus &&
-          this.refInput.current.focus();
+    R.pipe(
+      R.path(['refInput', 'current', 'focus']),
+      R.when(isNotNil, R.nthArg(0)())
+    )(this);
   }
   selectInputBase = () => {
-    this.refInput &&
-      this.refInput.current &&
-        this.refInput.current.select &&
-          this.refInput.current.select();
+    R.pipe(
+      R.path(['refInput', 'current', 'select']),
+      R.when(isNotNil, R.nthArg(0)())
+    )(this);
   }
 
   onBlur = () => {
     this.setState({ isFocus: false });
-    this.props.onBlur && this.props.onBlur();
+    R.when(isNotNil, R.nthArg(0)(), this.props.onBlur);
   }
   onFocus = () => {
     this.setState({ isFocus: true });
-    this.props.onFocus && this.props.onFocus();
+    R.when(isNotNil, R.nthArg(0)(), this.props.onFocus);
   }
 
   render() {
-    const { /* skiped ---> */ refInput, onFocus, onBlur, /* <--- skiped */ placeholder, ...props } = this.props;
+    const { /* skiped ---> */ refInput, onFocus, onBlur, /* <--- skiped */ className, placeholder, ...props } = this.props;
     return (
       <input
+        className={R.unapply(R.join(' '))(classes.container, className)}
         ref={this.refInput}
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         placeholder={this.state.isFocus ? '' : placeholder}
+        type="text"
         {...props}
       />
     );
