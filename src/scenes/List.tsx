@@ -9,6 +9,7 @@ import { TWord } from 'types';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
+import { AddWord } from 'components/AddWord';
 jss.setup(preset());
 
 const rawClasses = {
@@ -35,9 +36,14 @@ class ListComponent extends React.PureComponent<Props, State> {
     const { list } = this.props;
     return (
       <div>
-        {R.pipe(
-          R.addIndex(R.map)((word: TWord, index: number) => <Word key={index} word={word} />)
-        )(list)}
+        <div>
+          <AddWord />
+        </div>
+        <div>
+          {R.pipe(
+            R.addIndex(R.map)((word: TWord, index: number) => <Word key={index} word={word} />)
+          )(list)}
+        </div>
       </div>
     );
   }
