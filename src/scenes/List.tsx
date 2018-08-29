@@ -43,7 +43,8 @@ class ListComponent extends React.PureComponent<Props, State> {
   }
 }
 const mapStateToProps = (state: AppState) => ({
-  list: R.map((num: number) => ({ word: String(num), translate: `number is ${num}` }), _.range(1, 9))
+  // list: R.map((num: number) => ({ word: String(num), translate: `number is ${num}` }), _.range(1, 9))
+  list: state.list.list
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>) => {

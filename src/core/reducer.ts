@@ -5,15 +5,18 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { routerReducer, RouterState } from 'react-router-redux';
 
 import { TAuthState, authInitialState, auth } from './auth/reducer';
+import { TListState, listInitialState, list } from './list/reducer';
 
 export type AppState = {
   router: RouterState;
   auth: TAuthState;
+  list: TListState;
 };
 
 export const appInitialState: AppState = {
   router: { location: { pathname: '/', search: '', state: '', hash: '', }},
   auth: authInitialState,
+  list: listInitialState,
 };
 
 
@@ -29,6 +32,7 @@ export function createRootReducer(storage: any): Reducer<AppState> {
   const rootReducer = combineReducers<AppState>({
     router: routerReducer,
     auth: persistReducer(authPersistConfig, auth),
+    list,
   });
   const rootReducerWrapped: Reducer<AppState> = (state: AppState = appInitialState, action: AnyAction) => {
     return rootReducer(state, action);
