@@ -1,6 +1,7 @@
 import React from 'react';
-import { TextareaBase } from './TextareaBase';
-import { theme, lightFont } from 'ui/theme';
+import * as R from 'ramda';
+import { isNotNil, joinWithSpace } from 'helpers';
+import { theme, lightFont, borderBottom } from 'ui/theme';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
@@ -10,55 +11,46 @@ const rawClasses = {
   container: {
     alignItems: 'center',
     display: 'flex',
+    padding: '5px 8px',
     width: '100%',
 
-    borderTop: '0',
-    borderRight: '0',
-    borderLeft: '0',
-    borderBottom: `1px solid ${theme.colors.shadow}`,
+    ...borderBottom(),
   },
   input: {
     border: '0',
     height: '38px',
-    lineHeight: '28px',
     outline: 'none',
     width: '100%',
 
-    boxSizing: 'border-box' as 'border-box',
-    ...lightFont(theme.colors.greySecond, '16px')
+    ...lightFont(theme.colors.greySecond, '16px', '28px')
   }
 };
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
 
+type State = {
+};
+
 type Props = {
-  onBlur?: Function;
-  onChange: Function;
+  className?: string;
+  onChange: (value: string) => void;
   placeholder?: string;
   value: string;
 };
 
-type State = {
-};
-
 export class Textarea extends React.Component<Props, State> {
   onChange = (event: any) => {
-    this.props.onChange &&
-      this.props.onChange(event.target.value);
-  }
-  onBlur = () => {
-    this.props.onBlur &&
-      this.props.onBlur();
+    const text: string = R.path(['target', 'value'], event);
+    isNotNil(text) && this.props.onChange(text);
   }
 
   render() {
-    const { placeholder, value } = this.props;
+    const { className, placeholder, value } = this.props;
 
     return (
       <div className={classes.container}>
-        <TextareaBase
-          className={classes.input}
-          onBlur={this.onBlur}
+        <input
+          className={joinWithSpace(classes.input, className)}
           onChange={this.onChange}
           placeholder={placeholder}
           value={value}

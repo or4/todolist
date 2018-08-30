@@ -1,3 +1,6 @@
+import * as R from 'ramda';
+import { isNotNil, assocWhenArgIsNotNil } from 'helpers';
+
 const blue = '#4295f0';
 const green = '#38bf4f';
 const greyCool = '#86939e';
@@ -50,10 +53,16 @@ export const lightFont = (color: string, fontSize: string, lineHeight?: string) 
     fontFamily: theme.fontFamily.light,
     fontSize,
   };
-
-  typeof lineHeight !== 'undefined' && Object.assign(font, {
-    lineHeight,
-  });
-
-  return font;
+  return assocWhenArgIsNotNil('lineHeight', lineHeight, font);
 };
+
+export const borderBottom = () => ({
+  borderTop: '0',
+  borderRight: '0',
+  borderLeft: '0',
+  borderBottom: `1px solid ${theme.colors.border}`,
+});
+
+export const borderFull = () => ({
+  border: `1px solid ${theme.colors.border}`,
+});

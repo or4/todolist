@@ -3,10 +3,6 @@ declare module '*.png'
 declare module '*.jpg'
 declare module 'redux-persist/integration/react'
 
-declare module 'redux-persist/lib/stateReconciler/autoMergeLevel2' {
-  const content: any;
-  export default content;
-}
 
 declare module 'next-frame' {
   const content: any;

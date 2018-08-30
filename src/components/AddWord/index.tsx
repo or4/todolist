@@ -63,42 +63,48 @@ const initialState = {
   translate: '',
 };
 
-
+const callPreventDefaultSafely = callWhenIsNotNil(['preventDefault']);
 
 export class AddWordComponent extends React.PureComponent<Props, State> {
   state = initialState
   onWordChange = (word: string) => {
-    if (this.addWords(word)) {
-      return;
+    if (this.isReadyToAdd(word)) {
+      this.addWords(word);
+    } else {
+      this.setState({ word, });
     }
-    this.setState({ word, });
   }
   onTraslateChange = (translate: string) => {
-    if (this.addWords(translate)) {
-      return;
+    if (this.isReadyToAdd(translate)) {
+      this.addWords(translate);
+    } else {
+      this.setState({ translate, });
     }
-    this.setState({ translate, });
-  }
-  composeWord(): TWord {
-    const { word, translate } = this.state;
-    return { word, translate };
   }
   onSubmit = (event?: any) => {
-    callWhenIsNotNil(['preventDefault'], event);
+    callPreventDefaultSafely(event);
 
-    this.props.addWord(this.composeWord());
+    const word = this.composeWord();
+    if (this.isWordEmpty(word)) {
+      return;
+    }
+
+    this.props.addWord(word);
     this.setState(initialState);
   }
 
+  isReadyToAdd = (text) => R.contains('\n', text) || R.contains('-', text)
+  isWordEmpty = (word: TWord) => word.word === '' && word.translate === ''
+
+  composeWord(): TWord {
+    const { word, translate } = this.state;
+    return { word: R.trim(word), translate: R.trim(translate) };
+  }
   addWords(text: string) {
-    if (R.contains('\n', text) || R.contains('-', text)) {
-      const words: TWord[] = convertTextToWords(text);
-      R.forEach((value: TWord) => {
-        this.props.addWord(value);
-      })(words);
-      return true;
-    }
-    return false;
+    const words: TWord[] = convertTextToWords(text);
+    R.forEach((value: TWord) => {
+      this.props.addWord(value);
+    })(words);
   }
 
   render() {

@@ -18,8 +18,6 @@ const rawClasses = {
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
 
-//<div>
-
 type Props = {
   onClick?: () => void;
 };

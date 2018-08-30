@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 import { store,  history, persistor } from './store';
 import { Main } from './Main';
+import { isNotNil } from 'helpers';
 import './index.scss';
 
 const App = () => (
@@ -21,6 +22,6 @@ const App = () => (
 );
 
 const rootElement = document.getElementById('root');
-if (rootElement != null) {
+if (isNotNil(rootElement)) {
   ReactDOM.render(<App />, rootElement);
 }
