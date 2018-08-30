@@ -1,8 +1,8 @@
 import React from 'react';
+import { theme } from '../theme';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import { theme } from '../theme';
 jss.setup(preset());
 
 const rawClasses = {

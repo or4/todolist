@@ -10,6 +10,7 @@ const rawClasses = {
   container: {
     background: 'transparent',
     padding: '5px 8px',
+    // lineHeight: '28px',
 
 
     '&::placeholder': {
@@ -24,7 +25,7 @@ type State = {
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
 
-export class InputBase extends React.PureComponent<any, State> {
+export class TextareaBase extends React.PureComponent<any, State> {
   refInput: any = React.createRef();
   state = { isFocus: false };
 

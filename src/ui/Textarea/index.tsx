@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputBase } from './InputBase';
+import { TextareaBase } from './TextareaBase';
 import { theme, lightFont } from 'ui/theme';
 
 import jss from 'jss';
@@ -20,6 +20,7 @@ const rawClasses = {
   input: {
     border: '0',
     height: '38px',
+    lineHeight: '28px',
     outline: 'none',
     width: '100%',
 
@@ -29,8 +30,6 @@ const rawClasses = {
 };
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
-
-
 
 type Props = {
   onBlur?: Function;
@@ -42,7 +41,7 @@ type Props = {
 type State = {
 };
 
-export class Input extends React.Component<Props, State> {
+export class Textarea extends React.Component<Props, State> {
   onChange = (event: any) => {
     this.props.onChange &&
       this.props.onChange(event.target.value);
@@ -57,7 +56,7 @@ export class Input extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        <InputBase
+        <TextareaBase
           className={classes.input}
           onBlur={this.onBlur}
           onChange={this.onChange}

@@ -1,31 +1,46 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import * as R from 'ramda';
 import { AppState } from 'core';
 import { ListAddWord } from 'core/list/actions';
 import { TWord } from 'types';
-import * as R from 'ramda';
-import { isNotNil, callWhenIsNotNil } from 'helpers';
-import { Input } from 'ui/Input';
+import { callWhenIsNotNil } from 'helpers';
 import { SendSvg } from 'ui/svg/SendSvg';
+import { convertTextToWords } from 'utils/words';
+import { WordTextarea } from './WordTextarea';
+import { TranslateTextarea } from './TranslateTextarea';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
 jss.setup(preset());
 
 const rawClasses = {
-  container: {
+  form: {
     alignItems: 'center',
     display: 'flex',
+    flexDirection: 'column' as 'column',
     justifyContent: 'space-between',
     lineHeight: '23px',
   },
-  wordContainer: {
+
+  firstRowContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    width: '100%',
   },
-  translateContainer: {
+  wordContainer: {
+    width: '200px',
   },
   submitContainer: {
-    height: '24px'
+    height: '24px',
+    marginLeft: '10px',
+  },
+
+  secondRowContainer: {
+    minHeight: '76px',
+    width: '100%',
   },
 };
 
@@ -48,28 +63,20 @@ const initialState = {
   translate: '',
 };
 
+
+
 export class AddWordComponent extends React.PureComponent<Props, State> {
   state = initialState
   onWordChange = (word: string) => {
-    const obj = { word, };
-    if (R.anyPass([R.propSatisfies(R.contains('-'), 'word'), R.propSatisfies(R.contains('\n'), 'word')])(obj)) {
-      const words: TWord[] = R.pipe(
-        R.split('\n'),
-        R.map(R.pipe(
-          R.split('-'),
-          R.map(R.trim),
-          wordArr => ({ word: wordArr[0], translate: wordArr[1] })
-        )),
-      )(word);
-
-      R.forEach((value: TWord) => {
-        this.props.addWord(value);
-      })(words);
+    if (this.addWords(word)) {
       return;
     }
     this.setState({ word, });
   }
   onTraslateChange = (translate: string) => {
+    if (this.addWords(translate)) {
+      return;
+    }
     this.setState({ translate, });
   }
   composeWord(): TWord {
@@ -82,19 +89,36 @@ export class AddWordComponent extends React.PureComponent<Props, State> {
     this.props.addWord(this.composeWord());
     this.setState(initialState);
   }
+
+  addWords(text: string) {
+    if (R.contains('\n', text) || R.contains('-', text)) {
+      const words: TWord[] = convertTextToWords(text);
+      R.forEach((value: TWord) => {
+        this.props.addWord(value);
+      })(words);
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const { word, translate } = this.state;
     return (
-      <form className={classes.container} onSubmit={this.onSubmit}>
-        <div className={classes.wordContainer}>
-          <Input onChange={this.onWordChange} placeholder="Enter word" value={word} />
+      <form className={classes.form} onSubmit={this.onSubmit}>
+
+        <div className={classes.firstRowContainer}>
+          <div className={classes.wordContainer}>
+            <WordTextarea onChange={this.onWordChange} value={word} />
+          </div>
+          <div className={classes.submitContainer} >
+            <SendSvg onClick={this.onSubmit} />
+          </div>
         </div>
-        <div className={classes.translateContainer}>
-          <Input onChange={this.onTraslateChange} placeholder="Enter translate" value={translate} />
+
+        <div className={classes.secondRowContainer}>
+          <TranslateTextarea onChange={this.onTraslateChange} value={translate} />
         </div>
-        <div className={classes.submitContainer} >
-          <SendSvg onClick={this.onSubmit} />
-        </div>
+
         <button type="submit" style={{ display: 'none' }} />
       </form>
     );
