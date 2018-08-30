@@ -25,6 +25,8 @@ export const list: Reducer<TState> = (state: TState = initialState, action: Acti
       return initialState;
     case ActionTypes.LIST_ADD_WORD:
       return { ...state, list: R.insert(-1, action.word, state.list) };
+    case ActionTypes.LIST_REMOVE_WORD:
+      return { ...state, list: R.remove(R.indexOf(action.word, state.list), 1, state.list) };
     case ActionTypes.LIST_REQUEST:
       return { ...state, requesting: true };
     case ActionTypes.LIST_REQUEST_SUCCESS:

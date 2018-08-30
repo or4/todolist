@@ -80,6 +80,9 @@ export type ActionsAll = ListSetInitialState
   | ListAddWord
   | ListAddWordSuccess
   | ListAddWordFail
+  | ListRemoveWord
+  | ListRemoveWordSuccess
+  | ListRemoveWordFail
   | ListRequest
   | ListRequestSuccess
   | ListRequestFail;
