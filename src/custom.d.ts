@@ -1,15 +1,6 @@
 declare module '*.svg'
 declare module '*.png'
 declare module '*.jpg'
-declare module 'redux-persist/integration/react'
-
-
-declare module 'next-frame' {
-  const content: any;
-  export default content;
-}
-
-
 
 // Type definitions for jss-preset-default 0.5.0
 // Project: https://github.com/cssinjs/jss-preset-default
