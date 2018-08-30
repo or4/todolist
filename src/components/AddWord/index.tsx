@@ -1,9 +1,5 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import * as R from 'ramda';
-import { AppState } from 'core';
-import { ListAddWord } from 'core/list/actions';
 import { TWord } from 'types';
 import { callWhenIsNotNil } from 'helpers';
 import { SendSvg } from 'ui/svg/SendSvg';
@@ -47,12 +43,9 @@ const rawClasses = {
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
 
-type StateProps = {
-};
-type DispatchProps = {
+type Props = {
   addWord: (word: TWord) => void;
 };
-type Props = StateProps & DispatchProps;
 
 type State = {
   word: string;
@@ -66,7 +59,7 @@ const initialState = {
 
 const callPreventDefaultSafely = callWhenIsNotNil(['preventDefault']);
 
-export class AddWordComponent extends React.PureComponent<Props, State> {
+export class AddWord extends React.PureComponent<Props, State> {
   state = initialState
   onWordChange = (word: string) => {
     if (this.isReadyToAdd(word)) {
@@ -131,13 +124,3 @@ export class AddWordComponent extends React.PureComponent<Props, State> {
     );
   }
 }
-
-const mapStateToProps = (state: AppState) => ({
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>) => ({
-  addWord: (word: TWord) => {
-    dispatch(new ListAddWord(word));
-  }
-});
-export const AddWord = connect<StateProps, DispatchProps, void>(mapStateToProps, mapDispatchToProps)(AddWordComponent);

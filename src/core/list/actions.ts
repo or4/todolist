@@ -8,6 +8,10 @@ export enum ActionTypes {
   LIST_ADD_WORD_SUCCESS = 'List/add word success',
   LIST_ADD_WORD_FAIL = 'List/add word fail',
 
+  LIST_REMOVE_WORD = 'List/remove word',
+  LIST_REMOVE_WORD_SUCCESS = 'List/remove word success',
+  LIST_REMOVE_WORD_FAIL = 'List/remove word fail',
+
   LIST_REQUEST = 'List/list request',
   LIST_REQUEST_SUCCESS = 'List/list request success',
   LIST_REQUEST_FAIL = 'List/list request fail',
@@ -37,6 +41,22 @@ export class ListAddWordFail implements Action {
   constructor(public error: any) { }
 }
 
+// List Remove word
+
+export class ListRemoveWord implements Action {
+  public readonly type = ActionTypes.LIST_REMOVE_WORD;
+  constructor(public word: TWord) { }
+}
+
+export class ListRemoveWordSuccess implements Action {
+  readonly type = ActionTypes.LIST_REMOVE_WORD_SUCCESS;
+  constructor() { }
+}
+
+export class ListRemoveWordFail implements Action {
+  readonly type = ActionTypes.LIST_REMOVE_WORD_FAIL;
+  constructor(public error: any) { }
+}
 
 // List Request
 
