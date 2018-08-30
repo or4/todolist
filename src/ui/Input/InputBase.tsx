@@ -1,6 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
-import { isNotNil } from 'helpers';
+import { callWhenIsNotNil } from 'helpers';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
@@ -10,6 +10,7 @@ const rawClasses = {
   container: {
     background: 'transparent',
     padding: '5px 8px',
+
 
     '&::placeholder': {
       // color: 'white'
@@ -23,45 +24,37 @@ type State = {
 
 const { classes } = jss.createStyleSheet(rawClasses).attach();
 
-class InputBase extends React.PureComponent<any, State> {
+export class InputBase extends React.PureComponent<any, State> {
   refInput: any = React.createRef();
   state = { isFocus: false };
 
   focusInputBase = () => {
-    R.pipe(
-      R.path(['refInput', 'current', 'focus']),
-      R.when(isNotNil, R.nthArg(0)())
-    )(this);
+    callWhenIsNotNil(['refInput', 'current', 'focus'], this);
   }
   selectInputBase = () => {
-    R.pipe(
-      R.path(['refInput', 'current', 'select']),
-      R.when(isNotNil, R.nthArg(0)())
-    )(this);
+    callWhenIsNotNil(['refInput', 'current', 'select'], this);
   }
 
   onBlur = () => {
     this.setState({ isFocus: false });
-    R.when(isNotNil, R.nthArg(0)(), this.props.onBlur);
+    callWhenIsNotNil(['onBlur'], this.props);
   }
   onFocus = () => {
     this.setState({ isFocus: true });
-    R.when(isNotNil, R.nthArg(0)(), this.props.onFocus);
+    callWhenIsNotNil(['onFocus'], this.props);
   }
 
   render() {
     const { /* skiped ---> */ refInput, onFocus, onBlur, /* <--- skiped */ className, placeholder, ...props } = this.props;
     return (
-      <input
+      <textarea
         className={R.unapply(R.join(' '))(classes.container, className)}
         ref={this.refInput}
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         placeholder={this.state.isFocus ? '' : placeholder}
-        type="text"
         {...props}
       />
     );
   }
 }
-export default InputBase;

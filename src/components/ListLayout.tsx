@@ -16,9 +16,15 @@ const rawClasses = {
     padding: '0'
   },
   subContainer: {
-    background: 'white',
-    borderRadius: '8px',
-    marginTop: '50px',
+    background: theme.colors.white,
+    boxShadow: '0 4px 24px 0 rgba(0, 0, 0, 0.25)',
+    borderRadius: '4px',
+    minHeight: '545px',
+    margin: '50px auto',
+    position: 'relative' as 'relative',
+    width: '540px',
+  },
+  subContainer2: {
     padding: '50px',
   }
 };
@@ -36,7 +42,9 @@ export class ListLayout extends React.PureComponent<Props, State> {
     return (
       <div className={classes.container}>
         <div className={classes.subContainer}>
-          {children}
+          <div className={classes.subContainer2}>
+            {children}
+          </div>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import InputBase from './InputBase';
+import { InputBase } from './InputBase';
 import { theme, lightFont } from 'ui/theme';
 
 import jss from 'jss';
@@ -10,7 +10,7 @@ const rawClasses = {
   container: {
     alignItems: 'center',
     display: 'flex',
-    width: '343px',
+    width: '100%',
 
     borderTop: '0',
     borderRight: '0',
@@ -42,7 +42,7 @@ type Props = {
 type State = {
 };
 
-class Input extends React.Component<Props, State> {
+export class Input extends React.Component<Props, State> {
   onChange = (event: any) => {
     this.props.onChange &&
       this.props.onChange(event.target.value);
@@ -68,5 +68,3 @@ class Input extends React.Component<Props, State> {
     );
   }
 }
-
-export default Input;

@@ -1,7 +1,8 @@
 import { Reducer } from 'redux';
-import { ActionTypes, ActionsAll } from './actions';
-import { TWord } from 'types';
+import * as R from 'ramda';
 import { AppState } from 'store';
+import { TWord } from 'types';
+import { ActionTypes, ActionsAll } from './actions';
 
 type TState = {
   error?: any;
@@ -20,8 +21,10 @@ export type TListState = TState;
 export const listInitialState = initialState;
 export const list: Reducer<TState> = (state: TState = initialState, action: ActionsAll) => {
   switch (action.type) {
-    case ActionTypes.LIST_SET_INITIAL_STATE:
+    case ActionTypes.SET_INITIAL_STATE:
       return initialState;
+    case ActionTypes.LIST_ADD_WORD:
+      return { ...state, list: R.insert(0, action.word, state.list) };
     case ActionTypes.LIST_REQUEST:
       return { ...state, requesting: true };
     case ActionTypes.LIST_REQUEST_SUCCESS:

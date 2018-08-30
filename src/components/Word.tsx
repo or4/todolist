@@ -9,7 +9,7 @@ const rawClasses = {
   container: {
     display: 'flex',
     lineHeight: '23px',
-    width: '200px',
+    width: '100%',
 
     '& > div': {
       width: '50%',
