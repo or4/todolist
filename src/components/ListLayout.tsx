@@ -13,16 +13,16 @@ const rawClasses = {
     flexDirection: 'column' as 'column',
     height: 'calc(100vh)',
     justifyContent: 'top',
-    padding: '0'
+    overflow: 'auto',
+    padding: '0',
   },
   subContainer: {
     background: theme.colors.white,
     boxShadow: '0 4px 24px 0 rgba(0, 0, 0, 0.25)',
     borderRadius: '4px',
-    minHeight: '545px',
     margin: '50px auto',
     position: 'relative' as 'relative',
-    width: '540px',
+    width: '800px',
   },
   subContainer2: {
     padding: '50px',

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as R from 'ramda';
 import { isNotNil, joinWithSpace } from 'helpers';
-import { theme, lightFont, borderBottom } from 'ui/theme';
+import { theme, lightFont, borderFull } from 'ui/theme';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
@@ -11,18 +11,19 @@ const rawClasses = {
   container: {
     alignItems: 'center',
     display: 'flex',
-    padding: '5px 8px',
     width: '100%',
-
-    ...borderBottom(),
   },
   input: {
     border: '0',
     height: '38px',
+    maxHeight: '44px',
+    minHeight: '44px',
     outline: 'none',
+    padding: '5px 8px',
     width: '100%',
 
-    ...lightFont(theme.colors.greySecond, '16px', '28px')
+    ...borderFull(),
+    ...lightFont(theme.colors.greySecond, '16px', '32px')
   }
 };
 
@@ -49,7 +50,7 @@ export class Textarea extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        <input
+        <textarea
           className={joinWithSpace(classes.input, className)}
           onChange={this.onChange}
           placeholder={placeholder}

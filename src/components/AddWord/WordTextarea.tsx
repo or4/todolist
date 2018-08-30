@@ -7,6 +7,9 @@ jss.setup(preset());
 
 const rawClasses = {
   container: {
+    maxWidth: '200px',
+    minWidth: '200px',
+    resize: 'none' as any,
   }
 };
 
@@ -24,6 +27,7 @@ export class WordTextarea extends React.PureComponent<Props, State> {
     const { value, onChange } = this.props;
     return (
       <Textarea
+        className={classes.container}
         onChange={onChange}
         placeholder="Enter word"
         value={value}

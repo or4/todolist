@@ -31,14 +31,15 @@ const rawClasses = {
     width: '100%',
   },
   wordContainer: {
-    width: '200px',
+    // width: '200px',
   },
   submitContainer: {
     height: '24px',
-    marginLeft: '10px',
+    marginLeft: '15px',
   },
 
   secondRowContainer: {
+    marginTop: '8px',
     minHeight: '76px',
     width: '100%',
   },

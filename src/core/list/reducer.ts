@@ -13,7 +13,7 @@ type TState = {
 };
 
 const initialState: TState = {
-  list: [{ word: 'test', translate: 'test translate' }],
+  list: [],
   requesting: false,
 };
 
@@ -24,7 +24,7 @@ export const list: Reducer<TState> = (state: TState = initialState, action: Acti
     case ActionTypes.SET_INITIAL_STATE:
       return initialState;
     case ActionTypes.LIST_ADD_WORD:
-      return { ...state, list: R.insert(0, action.word, state.list) };
+      return { ...state, list: R.insert(-1, action.word, state.list) };
     case ActionTypes.LIST_REQUEST:
       return { ...state, requesting: true };
     case ActionTypes.LIST_REQUEST_SUCCESS:

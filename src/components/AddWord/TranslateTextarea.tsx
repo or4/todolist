@@ -7,6 +7,8 @@ jss.setup(preset());
 
 const rawClasses = {
   container: {
+    maxHeight: '88px',
+    minHeight: '88px',
   }
 };
 
@@ -24,8 +26,9 @@ export class TranslateTextarea extends React.PureComponent<Props, State> {
     const { value, onChange } = this.props;
     return (
       <Textarea
+        className={classes.container}
         onChange={onChange}
-        placeholder="Enter translate"
+        placeholder="Enter translate (you can paste several words separated by hyphen and new lines..)"
         value={value}
       />
     );

@@ -33,7 +33,7 @@ const persistConfig = {
   storage: storage,
   key: 'root2',
   stateReconciler: autoMergeLevel2,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'list'],
   blacklist: [],
 };
 

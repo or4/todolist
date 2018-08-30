@@ -6,11 +6,11 @@ import _ from 'lodash/fp';
 import { AppState } from 'core/reducer';
 import { Word } from 'components/Word';
 import { TWord } from 'types';
+import { AddWord } from 'components/AddWord';
+import { ListLayout } from 'components/ListLayout';
 
 import jss from 'jss';
 import preset from 'jss-preset-default';
-import { AddWord } from 'components/AddWord';
-import { ListLayout } from 'components/ListLayout';
 jss.setup(preset());
 
 const rawClasses = {
@@ -37,10 +37,11 @@ class ListComponent extends React.PureComponent<Props, State> {
     const { list } = this.props;
     return (
       <ListLayout>
+        <h5>Append new word</h5>
         <div>
           <AddWord />
         </div>
-        <h5>Words</h5>
+        <h5>List of words</h5>
         <div>
           {R.pipe(
             R.addIndex(R.map)((word: TWord, index: number) => <Word key={index} word={word} />)
