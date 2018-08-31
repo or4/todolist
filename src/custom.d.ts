@@ -1,6 +1,7 @@
 declare module '*.svg'
 declare module '*.png'
 declare module '*.jpg'
+declare module 'react-social-login'
 
 // Type definitions for jss-preset-default 0.5.0
 // Project: https://github.com/cssinjs/jss-preset-default

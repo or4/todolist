@@ -6,7 +6,8 @@
   "jsRules": {},
   "rules": {
     "jsx-no-multiline-js": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "jsx-wrap-multiline": false
   },
   "rulesDirectory": [],
   "semicolon": [

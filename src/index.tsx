@@ -11,14 +11,21 @@ import { Main } from './Main';
 import { isNotNil } from 'helpers';
 import './index.scss';
 
+import Demo from 'components/AuthTest/containers/demo';
+
+
+
 const App = () => (
-  <Provider store={store}>
-    <PersistGate loading={<div>Loading</div>} persistor={persistor}>
-      <ConnectedRouter history={history}>
-        <Route path="/" component={Main} />
-      </ConnectedRouter>
-    </PersistGate>
-  </Provider>
+  <div>
+    <Demo />
+    <Provider store={store}>
+      <PersistGate loading={<div>Loading</div>} persistor={persistor}>
+        <ConnectedRouter history={history}>
+          <Route path="/" component={Main} />
+        </ConnectedRouter>
+      </PersistGate>
+    </Provider>
+  </div>
 );
 
 const rootElement = document.getElementById('root');
