@@ -10,8 +10,9 @@ export class Main extends React.Component<Props, State> {
   render() {
     return (
       <Switch>
-        <Route path="/list" component={List} />
-        <Route path="/auth" component={Auth} />
+        <Route exact={true} path="/" component={List} />
+        <Route exact={true} path="/list" component={List} />
+        <Route exact={true} path="/auth" component={Auth} />
       </Switch>
     );
   }
