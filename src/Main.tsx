@@ -9,7 +9,7 @@ export class Main extends React.Component<Props, State> {
   render() {
     return (
       <Switch>
-        <Route path="/list" component={List} />
+        <Route path="/" component={List} />
       </Switch>
     );
   }
